@@ -197,6 +197,12 @@ namespace Clicking_game
                 (ClientSize.Width - gameOverLabel.Width) / 2,
                 (ClientSize.Height - gameOverLabel.Height) / 2
             );
+            foreach (var circle in Controls.OfType<Circle>().ToList())
+            {
+                circle.Clicked = true;
+                Controls.Remove(circle);
+                circle.Dispose();
+            }
             gameOverLabel.Visible = true;
             restartButton.Visible = true;
         }
@@ -212,16 +218,9 @@ namespace Clicking_game
             gameOverLabel.Visible = false;
             restartButton.Visible = false;
 
-            foreach (var circle in Controls.OfType<Circle>().ToList())
-            {
-                circle.Clicked = true;
-                Controls.Remove(circle);
-                circle.Dispose();
-            }
-
             score = 0;
             penalty = 0;
-            penaltyLabel.Text = "Штраф: " + penalty;
+            //penaltyLabel.Text = "Штраф: " + penalty;
 
             gameStopped = false;
             gameTimer.Interval = interval;
